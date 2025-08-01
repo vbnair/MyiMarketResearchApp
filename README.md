@@ -33,7 +33,6 @@ my-market-research-app/
 ├── package.json # Dependencies and scripts
 └── README.md # This documentation file
 
-<pre> ``` my-market-research-app/ ├── app/ │ ├── api/ │ │ └── analyze/ │ │ └── route.ts # Backend API route handler (POST) │ └── page.tsx # Frontend main SPA page ├── components/ │ └── InputForm.tsx # React input form component (improved tips) ├── lib/ │ ├── reddit.ts # Reddit API helpers + subreddit discovery + cache │ ├── googleTrends.ts # Google Trends stub functions │ ├── huggingface.ts # Hugging Face API helper (stub) │ ├── scoring.ts # Scoring logic for opportunities │ └── utils.ts # Input sanitization & helper functions ├── public/ # Static files (images, icons, etc.) ├── .env.local # Environment variables – NOT committed ├── next.config.js # Next.js config (optional) ├── tsconfig.json # TypeScript config ├── package.json # Dependencies and scripts └── README.md # This documentation file ``` </pre>
 
 ## Inputs and What They Mean
 
