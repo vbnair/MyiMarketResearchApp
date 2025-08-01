@@ -100,6 +100,7 @@ This project is open for extension and improvement. Contributions welcome. Keep 
 
 ---
 
+![Market Research SPA — v1.0](public/screenshot_v1.0.png)
 
 
 
