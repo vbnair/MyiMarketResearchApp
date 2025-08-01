@@ -1,103 +1,244 @@
-import Image from "next/image";
+// 'use client';
+
+// import { useState } from 'react';
+// import InputForm from '../components/InputForm';
+
+// export default function Home() {
+//   const [results, setResults] = useState<null | {
+//     insights: { topKeyword: string | null; message: string };
+//     opportunities: {
+//       keyword: string;
+//       score: number;
+//       demand: number;
+//       monetization: number;
+//       competitionGap: number;
+//     }[];
+//   }>(null);
+
+//   return (
+//     <main
+//       style={{
+//         padding: '1rem',
+//         fontFamily: 'Arial, sans-serif',
+//         maxWidth: 900,
+//         margin: '0 auto',
+//       }}
+//     >
+//       <h1>Market Research Tool</h1>
+//       <p>Enter seed keywords and optional parameters to get trending insights and opportunities.</p>
+
+//       <InputForm onResults={setResults} />
+
+//       {results && (
+//         <section style={{ marginTop: '2rem' }}>
+//           <h2>Key Insights</h2>
+//           <p>
+//             <strong>Top Keyword:</strong> {results.insights.topKeyword ?? 'N/A'}
+//           </p>
+//           <p>{results.insights.message}</p>
+
+//           <h3>Opportunities</h3>
+//           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+//             <thead>
+//               <tr style={{ backgroundColor: '#eee' }}>
+//                 <th style={{ border: '1px solid #ccc', padding: 8 }}>Keyword</th>
+//                 <th style={{ border: '1px solid #ccc', padding: 8 }}>Score</th>
+//                 <th style={{ border: '1px solid #ccc', padding: 8 }}>Demand</th>
+//                 <th style={{ border: '1px solid #ccc', padding: 8 }}>Monetization</th>
+//                 <th style={{ border: '1px solid #ccc', padding: 8 }}>Competition Gap</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {results.opportunities.map((opp, idx) => (
+//                 <tr
+//                   key={idx}
+//                   style={{ backgroundColor: idx % 2 === 0 ? '#fafafa' : 'white' }}
+//                 >
+//                   <td style={{ border: '1px solid #ccc', padding: 8 }}>{opp.keyword}</td>
+//                   <td style={{ border: '1px solid #ccc', padding: 8 }}>
+//                     {opp.score.toFixed(2)}
+//                   </td>
+//                   <td style={{ border: '1px solid #ccc', padding: 8 }}>
+//                     {(opp.demand * 100).toFixed(1)}%
+//                   </td>
+//                   <td style={{ border: '1px solid #ccc', padding: 8 }}>
+//                     {(opp.monetization * 100).toFixed(1)}%
+//                   </td>
+//                   <td style={{ border: '1px solid #ccc', padding: 8 }}>
+//                     {(opp.competitionGap * 100).toFixed(1)}%
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </section>
+//       )}
+//     </main>
+//   );
+// }
+
+//new
+
+'use client';
+
+import { useState } from 'react';
+import InputForm from '../components/InputForm';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [results, setResults] = useState<null | {
+    insights: { topKeyword: string | null; message: string };
+    opportunities: {
+      keyword: string;
+      score: number;
+      demand: number;
+      monetization: number;
+      competitionGap: number;
+    }[];
+  }>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    <main
+      style={{
+        padding: '1rem',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        maxWidth: 960,
+        margin: '0 auto',
+        color: '#202020',
+      }}
+    >
+      <h1 style={{ fontWeight: 'bold', fontSize: '2rem', marginBottom: '0.25rem' }}>
+        Market Research Tool
+      </h1>
+      <p style={{ color: '#555', marginBottom: '1.5rem' }}>
+        Enter your keywords and optional parameters. System applies intelligent defaults for optional fields to simplify your research.
+      </p>
+
+      {/* Minimal banner/note about system defaults */}
+      <div
+        style={{
+          backgroundColor: '#eef6fc',
+          borderLeft: '4px solid #3182ce',
+          padding: '12px 16px',
+          marginBottom: '1.5rem',
+          borderRadius: 4,
+          color: '#2c5282',
+          fontSize: '0.95rem',
+          fontStyle: 'italic',
+          userSelect: 'none',
+        }}
+        role="note"
+      >
+        Optional inputs (Geo, Timeframe, Top Features) will use default values if left blank.
+      </div>
+
+      {/* Input form */}
+      <InputForm onResults={setResults} />
+
+      {/* Results Display */}
+      {results && (
+        <section
+          style={{
+            marginTop: '2.5rem',
+            borderTop: '1px solid #ddd',
+            paddingTop: '1.5rem',
+          }}
+        >
+          <h2 style={{ fontWeight: '600', marginBottom: '0.75rem' }}>Key Insights</h2>
+          <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
+            <strong>Top Keyword:</strong>{' '}
+            <span style={{ color: '#3182ce' }}>{results.insights.topKeyword ?? 'N/A'}</span>
+          </p>
+          <p style={{ marginBottom: '1.5rem', lineHeight: 1.4 }}>{results.insights.message}</p>
+
+          {/* Explanation box */}
+          <div
+            style={{
+              backgroundColor: '#f9f9f9',
+              borderLeft: '4px solid #666',
+              padding: '12px 16px',
+              marginBottom: '1.5rem',
+              borderRadius: 4,
+              color: '#444',
+              fontSize: '0.95rem',
+              lineHeight: 1.5,
+            }}
+            role="region"
+            aria-label="Score interpretation"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <h3 style={{ marginTop: 0, marginBottom: 8 }}>How to interpret the results:</h3>
+            <ul style={{ margin: 0, paddingLeft: '1.25rem' }}>
+              <li>
+                <strong>Score:</strong> Overall opportunity score (0 to 1), combines demand, monetization potential, and competition gap.
+              </li>
+              <li>
+                <strong>Demand:</strong> Indicates search interest and trending popularity for the keyword.
+              </li>
+              <li>
+                <strong>Monetization:</strong> Estimates how commercially viable or profitable the opportunity could be.
+              </li>
+              <li>
+                <strong>Competition Gap:</strong> Represents how underserved or less competitive the space is — higher values mean less competition.
+              </li>
+            </ul>
+            <p style={{ marginTop: 8, fontStyle: 'italic' }}>
+              Use these metrics collectively to prioritize market opportunities that are popular, financially attractive, and less saturated.
+            </p>
+          </div>
+
+          <h3 style={{ fontWeight: '600', marginBottom: '0.75rem' }}>Opportunities</h3>
+          <div style={{ overflowX: 'auto' }}>
+            <table
+              style={{
+                width: '100%',
+                borderCollapse: 'collapse',
+                fontSize: '0.95rem',
+                minWidth: 600,
+              }}
+            >
+              <thead style={{ backgroundColor: '#f7f9fb' }}>
+                <tr>
+                  <th style={tableHeaderCellStyle}>Keyword</th>
+                  <th style={tableHeaderCellStyle}>Score</th>
+                  <th style={tableHeaderCellStyle}>Demand</th>
+                  <th style={tableHeaderCellStyle}>Monetization</th>
+                  <th style={tableHeaderCellStyle}>Competition Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.opportunities.map((opp, idx) => (
+                  <tr
+                    key={idx}
+                    style={{
+                      backgroundColor: idx % 2 === 0 ? '#ffffff' : '#fbfcfd',
+                    }}
+                  >
+                    <td style={tableBodyCellStyle}>{opp.keyword}</td>
+                    <td style={tableBodyCellStyle}>{opp.score.toFixed(2)}</td>
+                    <td style={tableBodyCellStyle}>{(opp.demand * 100).toFixed(1)}%</td>
+                    <td style={tableBodyCellStyle}>{(opp.monetization * 100).toFixed(1)}%</td>
+                    <td style={tableBodyCellStyle}>{(opp.competitionGap * 100).toFixed(1)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+    </main>
   );
 }
+
+const tableHeaderCellStyle: React.CSSProperties = {
+  borderBottom: '2px solid #ddd',
+  textAlign: 'left',
+  padding: '10px 12px',
+  color: '#555',
+  fontWeight: 600,
+};
+
+const tableBodyCellStyle: React.CSSProperties = {
+  borderBottom: '1px solid #eee',
+  padding: '10px 12px',
+  color: '#333',
+};
+
