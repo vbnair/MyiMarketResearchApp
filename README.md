@@ -11,7 +11,7 @@ The app uses:
 - Simple outputs with text and tables to help you quickly understand market trends
 
 ## Folder Structure
-
+```
 my-market-research-app/
 ├── app/
 │ ├── api/
@@ -32,7 +32,7 @@ my-market-research-app/
 ├── tsconfig.json # TypeScript config
 ├── package.json # Dependencies and scripts
 └── README.md # This documentation file
-
+```
 
 ## Inputs and What They Mean
 
