@@ -101,6 +101,8 @@ This project is open for extension and improvement. Contributions welcome. Keep 
 
 ![Market Research SPA — v1.0](public/screenshot_v1.0.png)
 
+Developed by **Vaisakh**.
+[vaisakhbk.online](https://www.vaisakhbk.online/).
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
